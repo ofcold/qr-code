@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="qr.png" width="220" height="220">
+	<img src="https://github.com/ofcold/qr-code/raw/master/qr.png" width="220" height="220">
 </p>
 
 An easy-to-use PHP QrCode generator.
