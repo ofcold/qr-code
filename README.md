@@ -40,6 +40,26 @@ $text = 'Happy New Year';
 // Default output svg format file.
 QrCode::generate($text);
 ```
+
+### Response
+
+> The browser directly outputs the image.
+
+#### use `QRcodeResponse`
+```php
+use Ofcold\QrCode\QRcodeResponse
+
+new QRcodeResponse(QrCode::generate($text))
+```
+
+#### use `response()`
+```php
+
+$qr = QrCode::color('#ff0000');
+
+response($qr->generate($text))->header('Content-Type', $qr->getContentType())
+```
+
 ### Format Change
 > QrCode Generator is setup to return a SVG image by default.
 Watch out! The format method must be called before any other formatting options such as size, color, backgroundColor, and margin.
