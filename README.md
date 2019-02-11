@@ -1,4 +1,7 @@
-# qr-code
+<p align="center">
+	<img src="qr.png">
+</p>
+
 An easy-to-use PHP QrCode generator.
 
 ## Introduction
@@ -27,4 +30,4 @@ QrCode::generate($text)->color('#ff0000')
 
 ## License
 
-This software is released under the (MIT license)[https://opensource.org/licenses/MIT].
+This software is released under the [MIT license](https://opensource.org/licenses/MIT).
