@@ -16,12 +16,13 @@
 	"require": {
 		"php": "^7.2",
 		"illuminate/http": "^5.5",
+		"illuminate/routing": "^5.5",
 		"illuminate/support": "^5.5",
 		"bacon/bacon-qr-code": "^2.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"Ofcold\\QrCode\\": ""
+			"Ofcold\\QrCode\\": "src/"
 		}
 	},
 	"config": {
