@@ -13,6 +13,7 @@ An easy-to-use PHP QrCode generator.
 
 ```php
 use Ofcold\QrCode\Facades\QrCode;
+use Ofcold\QrCode\HexToRgb;
 
 $text = 'Happy New Year';
 
@@ -25,7 +26,8 @@ QrCode::format('png')
 
 // Change the QR code color, Supported rgb and hex
 // Example: 255.255.0 OR #ff0000
-QrCode::color('#ff0000')
+QrCode::color(HexToRgb::make('#ff0000'))
+	// color([255, 0, 0])
 	->format('png')
 	->generate($text);
 
