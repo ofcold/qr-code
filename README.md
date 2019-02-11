@@ -41,6 +41,8 @@ $text = 'Happy New Year';
 QrCode::generate($text);
 ```
 ### Format Change
+> QrCode Generator is setup to return a SVG image by default.
+Watch out! The format method must be called before any other formatting options such as size, color, backgroundColor, and margin.
 
 ```php
 // Output other file formats.
@@ -59,9 +61,8 @@ QrCode::color(HexToRgb::make('#ff0000'))
 
 > QrCode Generator will by default return the smallest size possible in pixels to create the QrCode.
 
-You can change the size of a QrCode by using the size method. Simply specify the size desired in pixels using the following syntax:
-
 ```php
+// You can change the size of a QrCode by using the size method. Simply specify the size desired in pixels using the following syntax:
 QrCode::size(400)
 	->generate($text);
 ```
