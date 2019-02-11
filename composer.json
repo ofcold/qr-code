@@ -1,0 +1,34 @@
+{
+	"name": "naiveable/qrcode",
+	"description": "An easy-to-use PHP QrCode generator.",
+	"homepage": "https://ofcold.com",
+	"support": {
+		"issues": "https://github.com/ofcold/qr-code/issues",
+		"source": "https://github.com/ofcold/qr-code"
+	},
+	"authors": [
+		{
+			"name": "Bill Li",
+			"email": "bill@ofcold.com",
+			"role": "Owner"
+		}
+	],
+	"require": {
+		"php": "^7.2",
+		"bacon/bacon-qr-code": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ofcold\\QrCode\\": ""
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"minimum-stability": "dev"
+}
