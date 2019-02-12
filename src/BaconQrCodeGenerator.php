@@ -7,9 +7,13 @@ use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Renderer\Color\ColorInterface;
 use BaconQrCode\Renderer\Color\Gray;
 use BaconQrCode\Renderer\Color\Rgb;
+use BaconQrCode\Renderer\Eye\CompositeEye;
 use BaconQrCode\Renderer\Eye\ModuleEye;
+use BaconQrCode\Renderer\Eye\SimpleCircleEye;
+use BaconQrCode\Renderer\Eye\SquareEye;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
+use BaconQrCode\Renderer\Image\ImageBackEndInterface;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\Image\RendererInterface;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
@@ -20,6 +24,7 @@ use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Ofcold\QrCode\Contracts\QrCodeInterface;
+use Illuminate\Support\Str;
 
 class BaconQrCodeGenerator implements QrCodeInterface
 {
@@ -77,7 +82,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
 	 *
 	 * @var \BaconQrCode\Common\ErrorCorrectionLevel
 	 */
-	protected $errorCorrection = 0x01;
+	protected $errorCorrection;
 
 	/**
 	 * Holds the Encoder mode to encode a QrCode.
@@ -113,7 +118,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
 		// Holds the BaconQrCode Writer Object.
 		$writer = new Writer($this->imageRendererInstance());
 
-		$qrCode = $writer->writeString($text, $this->encoding);
+		$qrCode = $writer->writeString($text, $this->encoding, $this->errorCorrection);
 
 		if ($this->imageMerge !== null) {
 			$merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
@@ -138,8 +143,8 @@ class BaconQrCodeGenerator implements QrCodeInterface
 	 */
 	public function merge($filepath, $percentage = .2, $absolute = false)
 	{
-		if (function_exists('base_path') && !$absolute) {
-			$filepath = base_path().$filepath;
+		if (!$absolute) {
+			$this->imageMerge = file_get_contents(base_path($filepath));
 		}
 
 		$this->imageMerge = file_get_contents($filepath);
@@ -198,11 +203,11 @@ class BaconQrCodeGenerator implements QrCodeInterface
 	/**
 	 * Changes the style of the QrCode.
 	 *
-	 * @param string $module The module of the QrCode
+	 * @param string|null $module The module of the QrCode
 	 *
 	 * @return $this
 	 */
-	public function module($module)
+	public function module(?string $module = null)
 	{
 		switch ($module) {
 			case 'dots':
@@ -300,7 +305,12 @@ class BaconQrCodeGenerator implements QrCodeInterface
 		return $this;
 	}
 
-	protected function rendererStyleInstance()
+	/**
+	 * Renderer Style of the QR code instance.
+	 *
+	 * @return RendererStyle
+	 */
+	protected function rendererStyleInstance(): RendererStyle
 	{
 		$module = $this->module ?: SquareModule::instance();
 
@@ -316,6 +326,11 @@ class BaconQrCodeGenerator implements QrCodeInterface
 		);
 	}
 
+	/**
+	 * Created an new ImageRenderer instance.
+	 *
+	 * @return BaconQrCode\Renderer\ImageRenderer
+	 */
 	protected function imageRendererInstance()
 	{
 		return new ImageRenderer(
@@ -324,7 +339,13 @@ class BaconQrCodeGenerator implements QrCodeInterface
 		);
 	}
 
-	protected function getFormatInstance()
+	/**
+	 * Format Change
+	 * Three formats are currently supported; PNG, EPS, and SVG.
+	 *
+	 * @return \BaconQrCode\Renderer\Image\ImageBackEndInterface
+	 */
+	protected function getFormatInstance(): ImageBackEndInterface
 	{
 		switch ($this->format) {
 			case 'png':
