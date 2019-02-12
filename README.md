@@ -168,7 +168,7 @@ Helpers are an easy way to create QrCodes that cause a reader to perform a certa
 
 ### BitCoin
 
-This helpers generates a scannable bitcoin to send payments. (https://bitco.in/en/developer-guide#plain-text)[More information]
+This helpers generates a scannable bitcoin to send payments. [More information](https://bitco.in/en/developer-guide#plain-text)
 
 ```php
 QrCode::BTC($address, $amount);
