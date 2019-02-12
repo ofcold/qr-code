@@ -256,11 +256,11 @@ class BaconQrCodeGenerator implements QrCodeInterface
 	/**
 	 * Changes the error correction level of a QrCode.
 	 *
-	 * @param string $level Desired error correction level.  L = 7% M = 15% Q = 25% H = 30%
+	 * @param int $level Desired error correction level.  L = 1 M = 0 Q = 3 H = 1
 	 *
 	 * @return $this
 	 */
-	public function errorCorrection($level)
+	public function errorCorrection(int $level)
 	{
 		$this->errorCorrection = ErrorCorrectionLevel::forBits($level);
 
