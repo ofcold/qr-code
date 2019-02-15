@@ -5,6 +5,8 @@
 
 An easy-to-use PHP QrCode generator.
 
+[简体中文文档](https://github.com/ofcold/qr-code/blob/master/README_zh-CN.md)
+
 ## Introduction
 
 > Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode). We created an interface that is familiar and easy to install for Laravel users.
@@ -127,10 +129,10 @@ QrCode::merge($filename, $percentage, $absolute);
 // Generates a QrCode with an image centered in the middle.
 QrCode::format('png')->merge('path-to-image.png')->generate();
 
-//Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
+// Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
 QrCode::format('png')->merge('path-to-image.png', .2)->generate();
 
-//Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
+// Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
 QrCode::format('png')->merge('http://ofcold.com/icon.png', .2, true)->generate();
 ```
 
@@ -143,10 +145,10 @@ You should use a high level of error correction when using the merge method to e
 ```php
 QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
 
-//Generates a QrCode with an image centered in the middle.
+// Generates a QrCode with an image centered in the middle.
 QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
 
-//Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
+// Generates a QrCode with an image centered in the middle.  The inserted image takes up 20% of the QrCode.
 QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .2)->generate();
 ```
 > As with the normal merge call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
@@ -177,7 +179,7 @@ QrCode::BTC($address, $amount);
 //Sends a 0.334BTC payment to the address
 QrCode::BTC('bitcoin address', 0.334);
 
-//Sends a 0.334BTC payment to the address with some optional arguments
+// Sends a 0.334BTC payment to the address with some optional arguments
 QrCode::size(500)->BTC('address', 0.0034, [
 	'label' => 'my label',
 	'message' => 'my message',
@@ -193,13 +195,13 @@ This helper generates an e-mail qrcode that is able to fill in the e-mail addres
 ```php
 QrCode::email($to, $subject, $body);
 
-//Fills in the to address
+// Fills in the to address
 QrCode::email('foo@bar.com');
 
-//Fills in the to address, subject, and body of an e-mail.
+// Fills in the to address, subject, and body of an e-mail.
 QrCode::email('foo@bar.com', 'This is the subject.', 'This is the message body.');
 
-//Fills in just the subject and body of an e-mail.
+// Fills in just the subject and body of an e-mail.
 QrCode::email(null, 'This is the subject.', 'This is the message body.');
 ```
 
@@ -232,15 +234,15 @@ This helper makes SMS messages that can be prefilled with the send to address an
 ```php
 QrCode::SMS($phoneNumber, $message);
 
-//Creates a text message with the number filled in.
+// Creates a text message with the number filled in.
 QrCode::SMS('555-555-5555');
 
-//Creates a text message with the number and message filled in.
+// Creates a text message with the number and message filled in.
 QrCode::SMS('555-555-5555', 'Body of the message');
 
 ```
 
-### WiFi
+### Wi-Fi
 
 This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 
@@ -252,18 +254,18 @@ QrCode::wiFi([
 	'hidden' => 'Whether the network is a hidden SSID or not.'
 ]);
 
-//Connects to an open WiFi network.
+// Connects to an open WiFi network.
 QrCode::wiFi([
 	'ssid' => 'Network Name',
 ]);
 
-//Connects to an open, hidden WiFi network.
+// Connects to an open, hidden WiFi network.
 QrCode::wiFi([
 	'ssid' => 'Network Name',
 	'hidden' => 'true'
 ]);
 
-//Connects to an secured, WiFi network.
+// Connects to an secured, WiFi network.
 QrCode::wiFi([
 	'ssid' => 'Network Name',
 	'encryption' => 'WPA',
