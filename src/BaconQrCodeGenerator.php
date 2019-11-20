@@ -321,7 +321,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
 			new ModuleEye($module),
 			Fill::uniformColor(
 				$this->backgroundColor ?: new Gray(100),
-				$this->foregroundColor ?: new Gray(0),
+				$this->foregroundColor ?: new Gray(0)
 			)
 		);
 	}
